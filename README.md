@@ -1,8 +1,10 @@
-# Sim-CLIP: Unsupervised Siamese Adversarial Fine-Tuning for Robust Visual Language Models
+# Securing Vision-Language Models with a Robust Encoder Against Jailbreak and Adversarial Attacks
 
 <!-- ![system architecture](./utils/arch.png) -->
 
-<p align="justify">Vision-language models (VLMs) have achieved remarkable performance on multimodal tasks but remain vulnerable to adversarial attacks targeting the vision component. We propose Sim-CLIP, an unsupervised adversarial fine-tuning method that enhances the robustness of the widely-used CLIP vision encoder against such attacks. By employing a Siamese architecture with cosine similarity loss, Sim-CLIP learns semantically meaningful and attack-resilient visual representations without requiring large batch sizes or momentum encoders. We demonstrate that VLMs enhanced with Sim-CLIP's fine-tuned CLIP encoder exhibit significantly enhanced robustness against adversarial attacks, while maintaining high clean accuracy across diverse downstream tasks. Notably, our approach does not require any additional training or fine-tuning of the VLM itself. Simply replacing the original vision encoder with our fine-tuned encoder is sufficient to provide robustness against adversarial attacks. This work underscores the criticality of reinforcing foundational models like CLIP to safeguard the reliability of downstream VLM applications.</p>
+<p align="justify">Large Vision-Language Models (LVLMs), trained on multimodal big datasets, have significantly advanced AI by excelling in vision-language tasks. However, these models remain vulnerable to adversarial attacks, particularly jailbreak attacks, which bypass safety protocols and cause the model to generate misleading or harmful responses. This vulnerability stems from both the inherent susceptibilities of LLMs and the expanded attack surface introduced by the visual modality. We propose Sim-CLIP+, a novel defense mechanism that adversarially fine-tunes the CLIP vision encoder by leveraging a Siamese architecture. This approach maximizes cosine similarity between perturbed and clean samples, facilitating resilience against adversarial manipulations.
+Sim-CLIP+ offers a plug-and-play solution, allowing seamless integration into existing LVLM architectures as a robust vision encoder. Unlike previous defenses, our method requires no structural modifications to the LVLM and incurs minimal computational overhead. Sim-CLIP+ demonstrates effectiveness against both gradient-based adversarial attacks and various jailbreak techniques.
+We evaluate Sim-CLIP+ against three distinct jailbreak attack strategies and perform clean evaluations using standard downstream datasets, including COCO for image captioning and OKVQA for visual question answering. Extensive experiments demonstrate that Sim-CLIP+ maintains high clean accuracy while substantially improving robustness against both gradient-based adversarial attacks and jailbreak techniques.</p>
 
 ## Contents
 
@@ -15,12 +17,18 @@
 
 ## Overview
 
+
+
 <p align="center">
-  <img src="./utils/arch.png" width="950" alt="accessibility text">
+  <img src="./assets/syswork.png" width="950" alt="accessibility text">
 </p>
-<p align="justify">
-Adversarial attacks on vision-language models (VLMs) pose a significant challenge as they can compromise the model's ability to accurately interpret and respond to visual inputs. Previous approaches such as FARE have attempted to enhance the robustness of VLMs by minimizing the discrepancy between the embeddings of clean and adversarially perturbed images using ℓ<sub>2</sub> loss. However, this method struggles with high-dimensional data leading to inefficiencies and a failure to capture the full semantic meaning of image features. To address these limitations we introduce Sim-CLIP, an unsupervised adversarial fine-tuning approach for the CLIP vision encoder that leverages a Siamese architecture. By generating perturbed views of input images and employing a cosine similarity loss our method encourages the model to learn features invariant to adversarial perturbations. Additionally, we incorporate a stop-gradient mechanism to prevent loss collapse ensuring stable and effective training. This results in a model that not only exhibits improved robustness against adversarial attacks but also retains the semantic richness of image features outperforming previous methods in maintaining meaningful patterns essential for downstream tasks.
-</p>
+
+
+<p align="justify">Adversarial attacks, particularly jailbreak attacks, pose a significant threat to Large Vision-Language Models (LVLMs) by bypassing safety protocols and prompting harmful or misleading outputs. These vulnerabilities stem from the expanded attack surface introduced by the visual modality and the inherent weaknesses of LLMs. To address this, we propose Sim-CLIP+, a novel defense mechanism that enhances the robustness of the CLIP vision encoder within LVLMs. As illustrated in Figure (a), Sim-CLIP+ utilizes a Siamese architecture to fine-tune the vision encoder by maximizing the cosine similarity between clean and adversarially perturbed images. This process helps the model learn invariant features, strengthening its resistance to adversarial manipulations. Additionally, Figure (b) demonstrates how a robust Sim-CLIP+ encoder effectively blocks jailbreak attempts during LVLM inference, preventing harmful outputs. Sim-CLIP+ is a plug-and-play solution that integrates seamlessly into existing LVLM architectures, requiring no structural modifications and adding minimal computational overhead, making it a powerful tool against adversarial and jailbreak attacks.</p>
+
+
+
+
 
 ## Installation
 
