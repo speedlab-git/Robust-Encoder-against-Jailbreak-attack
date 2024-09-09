@@ -117,6 +117,59 @@ checkpoint = torch.load('simclip4.pt path', map_location=torch.device('gpu'))
 model.vision_encoder.load_state_dict(checkpoint)
 ```
 
+
+
+## Jailbreak Attacks 
+
+### VisualAdv 
+
+To run VisualAdv, follow these steps:
+
+1. Change directory to VisualAdv:
+    ```
+    cd VisualAdv
+    ```
+
+2. Set up the environment for LLaVA-LLaMA-2 by following the instructions in the original repository: [LLaVA Repository](https://github.com/haotian-liu/LLaVA)
+
+3. After setting up the environment and obtaining the model, save it to the path:
+    ```
+    ./ckpts/llava_llama_2_13b_chat_freeze
+    ```
+
+4. The adversarial image is already provided in the bash prompt with the adversarial prompts.
+
+5. Run the following command to execute the inference:
+    ```
+    ./bash/llava_inference_robustPrev.sh
+    ```
+
+
+### ImgJP attack
+
+1. Change directory to ImgJP:
+    ```
+    cd ImgJP
+    ```
+2. Set up the environment using the provided YAML file:
+    ```
+    conda env create -f environment.yml
+    conda activate jbattack
+    ```
+3. 
+
+3. For inference, we use LLAVA modules setup in VisualAdv attack. Go to the VisualAdv folder and run:
+    ```
+    ./bash/llava_inference_ImgJP.sh
+    ```
+
+
+
+### 
+
+
+
+
 ## Evaluation
 
 ### Zero-shot Classification
