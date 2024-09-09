@@ -107,14 +107,13 @@ or execute the bash script(you can specify the training parameters inside). Make
 To use these models, you can load them using the provided code. For example, to load the Sim-CLIP<sup>4</sup> model, you can use the following code snippet:
 
 ```
-import torch
-import open_clip
-model, _, image_processor = open_clip.create_model_and_transforms(
-            'ViT-L-14', pretrained='openai', device='gpu'
-        )
+### Using Sim-CLIP Robust Vision Encoder during Inference
 
-checkpoint = torch.load('simclip4.pt path', map_location=torch.device('gpu'))
-model.vision_encoder.load_state_dict(checkpoint)
+To use the Sim-CLIP robust vision encoder during inference, follow these steps:
+
+1. Open the `builder.py` file located in the `VisualAdv/llava_llama_2/model/` directory.
+2. Go to line `132` in the `builder.py` file.
+3. Replace the existing path with `Sim-CLIP` as shown below:
 ```
 
 
@@ -165,113 +164,34 @@ To run VisualAdv, follow these steps:
 
 
 
-### 
+### HADES attack 
 
+### HADES attack 
 
+1. Change directory to HADES:
+    ```
+    cd HADES
+    ```
 
+2. Set up the environment by following the instructions in the original repository: [HADES Repository](https://github.com/RUCAIBox/HADES). Save the VLM trained checkpoints in the `checkpoints` folder
 
-## Evaluation
+3. After setting up the environment and obtaining the necessary checkpoints, save them to the appropriate paths as specified in the repository.
 
-### Zero-shot Classification
+4. Download the adversarial data from the following [link](https://drive.google.com/drive/folders/1k4coKdLd_iLhwyTyWmz8nQ0thN4D01qc)
 
-Acquire the classification dataset by visiting the Huggingface CLIP_benchmark repository at [Huggingface CLIP_benchmark](https://huggingface.co/clip-benchmark). Configure the models for evaluation in `CLIP_benchmark/benchmark/models.txt` and specify the datasets in `CLIP_benchmark/benchmark/datasets.txt`. Then execute
-
-```
-
-cd CLIP_benchmark
-./bash/run_benchmark_adv.sh
-
-```
-
-### Down-stream tasks evaluation (Untargeted Attacks)
-
-Before proceeding with Down-stream tasks evaluations, download validation annotations set from [Huggingface openflamingo repository](https://huggingface.co/datasets/openflamingo/eval_benchmark/tree/main)
-
-### Captioning Tasks
-
-- OpenFlamingo
-
-  To evaluate the OpenFlamingo 9B model, first download the model from [here](https://huggingface.co/openflamingo/OpenFlamingo-9B-vitl-mpt7b/tree/main). Then, supply the downloaded annotation set and flamingo checkpoint paths in `/bash/of_eval_9B_coco.sh` . Set the `--vision_encoder_pretrained` parameter to `openai` or provide the path to a fine-tuned CLIP model checkpoint (e.g., Sim-CLIP). Finally, run the evaluation script.
-
-```
-
-./bash/of_eval_9B_coco.sh
-
-```
-
-```
-./bash/of_eval_9B_Flickr.sh
-
-```
-
-- LLAVA
-
-  The LLaVA model checkpoint will be automatically downloaded from repository. Update the dataset path with the location of your downloaded dataset and then execute the following command:
-
-```
-
-./bash/llava_eval_coco.sh
-
-```
-
-### Visual Question Answering Tasks
-
-- For VQA, provide the path of OKVQA dataset in the script and then execute the following commands:
-
-For LLAVA run
-
-```
-
-./bash/llava_eval_okvqa.sh
-
-```
-
-For Flamingo run
-
-```
-
-./bash/of_eval_9B_okvqa.sh
-
-```
-
-## Targeted attacks
-
-To perform targeted attacks with the LLAVA model on the COCO or Flickr30k dataset, please run these steps:
-
-
-```
-./bash/eval_targeted.sh
-```
-
-**Note**: Default target strings can be updated in `run_evaluation.py`
-
-For targeted attacks on custom images, update `vlm_eval/run_evaluation_qualitative.py` with your images and captions, then execute:
-
-```
-python -m vlm_eval.run_evaluation_qualitative --precision float32 --attack apgd --eps 2 --steps 10000 --vlm_model_name llava --vision_encoder_pretrained openai --verbose
-```
-**Note**: 
-To increase the strength of the attack, modify the `--attack` parameter with higher steps in the bash script. A higher attack step size results in a stronger attack.
-
-
-
-
-
-
-
-## Results
-
-
+5. Run the following command to execute the evaluation:
+    ```
+    bash run_evaluation.sh abstract llava black_box
+    ```
 
 
 ## Acknowledgements
 
 We extend our gratitude to the developers and contributors of the following repositories for their invaluable resources and tools that have significantly aided in the development and evaluation of our project:
 
-- [OpenFlamingo](https://github.com/mlfoundations/open_flamingo)
 - [LLaVA](https://github.com/haotian-liu/LLaVA)
-- [CLIP Benchmark](https://github.com/LAION-AI/CLIP_benchmark)
-- [AutoAttack](https://github.com/fra31/auto-attack)
-- [RobustVLM](https://github.com/chs20/RobustVLM)
+- [VisualAdv](https://github.com/Unispac/Visual-Adversarial-Examples-Jailbreak-Large-Language-Models)
+- [HADES](https://github.com/RUCAIBox/HADES)
+- [ImgJP](https://github.com/abc03570128/Jailbreaking-Attack-against-Multimodal-Large-Language-Model/tree/main)
 
 
