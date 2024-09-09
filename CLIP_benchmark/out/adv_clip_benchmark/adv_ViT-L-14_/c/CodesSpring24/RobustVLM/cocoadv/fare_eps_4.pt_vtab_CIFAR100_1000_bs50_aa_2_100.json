@@ -1,0 +1,1 @@
+{"dataset": "wds/vtab/CIFAR100", "model": "ViT-L-14", "pretrained": "/c/CodesSpring24/RobustVLM/cocoadv/fare_eps_4.pt", "beta": null, "task": "zeroshot_classification", "metrics": {"acc1": 0.331, "acc5": 0.744, "mean_per_class_recall": 0.3323865187100482}, "language": "en", "attack": "aa", "iterations_adv": 100, "eps": 2.0, "norm": "Linf"}
