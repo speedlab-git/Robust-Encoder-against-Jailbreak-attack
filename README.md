@@ -14,9 +14,9 @@ We evaluate Sim-CLIP+ against three distinct jailbreak attack strategies and per
 - [Adversarial Training](#adversarial-training)
 - [Models](#models)
 - [Jailbreak Attacks](#jbattacks)
-    -[VisualAdv](#visual)
-    -[ImgJP](#visual)
-    -[Hades](#hades)
+    - [VisualAdv](#visual)
+    - [ImgJP](#imgjp)
+    - [Hades](#hades)
 - [Evaluation](#evaluation)
 
 ## Overview
