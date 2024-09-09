@@ -10,9 +10,13 @@ We evaluate Sim-CLIP+ against three distinct jailbreak attack strategies and per
 
 - [Overview](#overview)
 - [Installation](#installation)
-- [Dataset](#dataset)
+- [Fine-tuning Dataset](#dataset)
 - [Adversarial Training](#adversarial-training)
 - [Models](#models)
+- [Jailbreak Attacks](#jbattacks)
+    -[VisualAdv](#visual)
+    -[ImgJP](#visual)
+    -[Hades](#hades)
 - [Evaluation](#evaluation)
 
 ## Overview
@@ -35,19 +39,18 @@ We evaluate Sim-CLIP+ against three distinct jailbreak attack strategies and per
 1. Clone this repository and navigate to the SimCLIP folder:
 
 ```
-git clone https://github.com/speedlab-git/SimCLIP.git
-cd SimCLIP
+git clone https://github.com/speedlab-git/Robust-Encoder-against-Jailbreak-attack.git
+cd Robust-Encoder-against-Jailbreak-attack
 ```
 
 2. We recommend you to use [Anaconda](https://www.anaconda.com/products/distribution) to maintain installed packages and the environment. We use **Python 3.11** for our training and evaluation. Install required packages using the following commands:
 
 ```
-conda create -n simclip python=3.11 -y
-conda activate simclip
+conda create -n robustEnocder python=3.11 -y
+conda activate robustEnocder
 pip install -r requirements.txt
 ```
 
-## Dataset
 
 ### Adversarial training dataset
 
@@ -65,26 +68,12 @@ After downloading the ImageNet dataset, extract the training and validation data
 ./bash/imagenet/extract_ILSVRC.sh
 ```
 
-### Evaluation dataset
-
-<p align="justify">For evaluating the robustness and performance of our fine-tuned CLIP vision encoder, we utilize a diverse set of datasets tailored for different tasks. For Visual Question Answering (VQA)
-tasks, we employ the OKVQA and VizWiz datasets, which provide challenging benchmarks for assessing the model's ability to understand and answer questions based on visual content.
-For image captioning tasks, we use the COCO and Flickr30k datasets, which are widely recognized for their comprehensive annotations and variety of images. The following table provides download links for each dataset we used in our experiments:<p>
-
-| Dataset Name | Download Link                                                                         |
-| ------------ | ------------------------------------------------------------------------------------- |
-| OKVQA        | [Download OKVQA](https://okvqa.allenai.org/download.html)                             |
-| COCO         | [Download COCO](https://cocodataset.org/#download)                                    |
-| Flickr30k    | [Download Flickr30k](https://www.kaggle.com/datasets/hsankesara/flickr-image-dataset) |
-| VizWiz       | [Download VizWiz](https://vizwiz.org/tasks-and-datasets/)                             |
-
-<!-- https://huggingface.co/datasets/openflamingo/eval_benchmark/tree/main -->
 
 ## Adversarial training
 
 In this repository, we provide scripts for running adversarial training with `FARE` and `TeCoA` alongside our proposed method, `Sim-CLIP`. We have provided bash scripts for easier execution of these training methods. Each script is tailored to run the respective training method with the necessary configurations. 
 
-### 1. Sim-CLIP<sup>4</sup>
+### 1. Sim-CLIP+<sup>4</sup>
 
 ```
 python -m train.adversarial_training_simclip --clip_model_name ViT-L-14 --pretrained openai --dataset imagenet --imagenet_root /c/CodesSpring24/Data/imagenet-object-localization-challenge/ILSVRC/Data/CLS-LOC --template std --output_normalize False --steps 10000 --warmup 1400 --batch_size 64 --loss l2 --opt adamw --lr 1e-3 --wd 1e-5 --attack pgd --attack_loss l2 --norm linf --eps 4 --iterations_adv 10 --stepsize_adv 1 --wandb True --output_dir "output directory" --experiment_name SimCLIP4 --log_freq 10
@@ -96,25 +85,6 @@ or execute the bash script(you can specify the training parameters inside). Make
 ./bash/training/simclip_train.sh
 ```
 
-### 2. FARE<sup>4</sup>
-
-```
-python -m train.adversarial_training_clip --clip_model_name ViT-L-14 --pretrained openai --dataset imagenet --imagenet_root /c/CodesSpring24/Data/imagenet-object-localization-challenge/ILSVRC/Data/CLS-LOC --template std --output_normalize False --steps 10000 --warmup 1400 --batch_size 64 --loss l2 --opt adamw --lr 1e-5 --wd 1e-4 --attack pgd --inner_loss l2 --norm linf --eps 4 --iterations_adv 10 --stepsize_adv 1 --wandb False --output_dir "output directory" --experiment_name FARE4 --log_freq 10
-```
-
-```
-./bash/training/fare_train.sh
-```
-
-### 3. TeCoA<sup>4</sup>
-
-```
-python -m train.adversarial_training_clip_up --clip_model_name ViT-L-14 --pretrained openai --dataset imagenet --imagenet_root /c/CodesSpring24/Data/imagenet-object-localization-challenge/ILSVRC/Data/CLS-LOC --template std --output_normalize False --steps 10000 --warmup 1400 --batch_size 64 --loss ce --opt sgd --lr 1e-3 --wd 1e-5 --attack pgd --inner_loss ce --norm linf --eps 4 --iterations_adv 10 --stepsize_adv 1 --wandb True --output_dir "output directory" --experiment_name TeCOA4 --log_freq 10
-```
-
-```
-./bash/training/tecoa_train.sh
-```
 
 ### **Note:**
 
@@ -131,8 +101,6 @@ python -m train.adversarial_training_clip_up --clip_model_name ViT-L-14 --pretra
 | Sim-CLIP<sup>2</sup> | Robust | Our Method                                                   | [Download Sim-CLIP<sup>2</sup>](https://huggingface.co/hossainzarif19/SimCLIP/blob/main/simclip2.pt)        |
 | FARE<sup>4</sup>     | Robust | [Schlarmann et al. (2024)](https://arxiv.org/pdf/2402.12336) | [Download FARE<sup>4</sup>](https://huggingface.co/collections/chs20/robust-clip-65d913e552eca001fdc41978)  |
 | FARE<sup>2</sup>     | Robust | [Schlarmann et al. (2024)](https://arxiv.org/pdf/2402.12336) | [Download FARE<sup>2</sup>](https://huggingface.co/collections/chs20/robust-clip-65d913e552eca001fdc41978)  |
-| TeCoA<sup>4</sup>    | Robust | [Mao et al. (2023)](https://arxiv.org/abs/2212.07016)        | [Download TeCoA<sup>4</sup>](https://huggingface.co/collections/chs20/robust-clip-65d913e552eca001fdc41978) |
-| TeCoA<sup>2</sup>    | Robust | [Mao et al. (2023)](https://arxiv.org/abs/2212.07016)        | [Download TeCoA<sup>2</sup>](https://huggingface.co/collections/chs20/robust-clip-65d913e552eca001fdc41978) |
 
 ## Usage
 
