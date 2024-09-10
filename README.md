@@ -113,7 +113,7 @@ To use the Sim-CLIP robust vision encoder during inference, follow these steps:
 
 1. Open the `builder.py` file located in the `VisualAdv/llava_llama_2/model/` directory.
 2. Go to line `132` in the `builder.py` file.
-3. Replace the existing path with `Sim-CLIP` as shown below:
+3. Replace the existing path with `Simclip4.pt` vision encoder 
 ```
 
 
