@@ -1,4 +1,20 @@
-# Securing Vision-Language Models with a Robust Encoder Against Jailbreak and Adversarial Attacks
+
+
+
+<h1 align="center">Securing Vision-Language Models with a Robust Encoder Against Jailbreak and Adversarial Attacks</h1>
+
+<p align="center">
+  <b>Md Zarif Hossain</b> · <b>Ahmed Imteaj</b>
+</p>
+
+<p align="center">
+<a href="https://arxiv.org/abs/2409.07353"><img src="https://img.shields.io/badge/arXiv-2409.07353-red"></a>
+  <img src="https://img.shields.io/badge/Paper%20Status-In--Review-yellow">
+</p>
+
+<hr>
+
+
 
 <!-- ![system architecture](./utils/arch.png) -->
 
