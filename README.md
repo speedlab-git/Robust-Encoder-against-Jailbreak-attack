@@ -16,7 +16,7 @@
 
 
 ## News
-- **Accepted in IEEE Big Data 2024 Privacy and Security of Big Data (PSBD) track**
+- [10/28/2024] **Accepted in IEEE Big Data 2024 Privacy and Security of Big Data (PSBD) track**
 
 
 <!-- ![system architecture](./utils/arch.png) -->
