@@ -9,15 +9,18 @@
 
 <p align="center">
 <a href="https://arxiv.org/abs/2409.07353"><img src="https://img.shields.io/badge/arXiv-2409.07353-red"></a>
-  <img src="https://img.shields.io/badge/Paper%20Status-In--Review-yellow">
+    <img src="https://img.shields.io/badge/Paper%20Status-Accepted-green">
 </p>
 
 <hr>
 
 
+## News
+- **Accepted in IEEE Big Data 2024 Privacy and Security of Big Data (PSBD) track**
+
 
 <!-- ![system architecture](./utils/arch.png) -->
-
+## Abstract
 <p align="justify">Large Vision-Language Models (LVLMs), trained on multimodal big datasets, have significantly advanced AI by excelling in vision-language tasks. However, these models remain vulnerable to adversarial attacks, particularly jailbreak attacks, which bypass safety protocols and cause the model to generate misleading or harmful responses. This vulnerability stems from both the inherent susceptibilities of LLMs and the expanded attack surface introduced by the visual modality. We propose Sim-CLIP+, a novel defense mechanism that adversarially fine-tunes the CLIP vision encoder by leveraging a Siamese architecture. This approach maximizes cosine similarity between perturbed and clean samples, facilitating resilience against adversarial manipulations.
 Sim-CLIP+ offers a plug-and-play solution, allowing seamless integration into existing LVLM architectures as a robust vision encoder. Unlike previous defenses, our method requires no structural modifications to the LVLM and incurs minimal computational overhead. Sim-CLIP+ demonstrates effectiveness against both gradient-based adversarial attacks and various jailbreak techniques.
 We evaluate Sim-CLIP+ against three distinct jailbreak attack strategies and perform clean evaluations using standard downstream datasets, including COCO for image captioning and OKVQA for visual question answering. Extensive experiments demonstrate that Sim-CLIP+ maintains high clean accuracy while substantially improving robustness against both gradient-based adversarial attacks and jailbreak techniques.</p>
